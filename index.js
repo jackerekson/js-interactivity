@@ -16,7 +16,7 @@ const addMovie = e => {
     deleteBtn.textContent = 'X'
     deleteBtn.addEventListener('click', deleteMovie)
     movie.appendChild(deleteBtn)
-
+    
     const movies = document.querySelector('ul')
     movies.appendChild(movie);
     inputField.value = ''
@@ -27,13 +27,22 @@ enterBtn.addEventListener('click', addMovie)
 
 const deleteMovie = e => {
     event.target.parentNode.remove()
-    message.textContent = 'Movie Deleted!'
+    message.textContent = `${event.target.parentNode.firstChild.textContent} deleted!`
+    revealMessage()
 }
 
 const crossOffMovie = e => {
     event.target.classList.toggle('checked')
     
     if(event.target.classList.contains('checked')){
-        message.textContent = 'Movie watched!'
-    } else message.textContent = "Woops it's been uncrossed!"
+        message.textContent = `${event.target.textContent} has been removed!`
+    } else message.textContent = `${event.target.textContent} been uncrossed!`
+    revealMessage()
+}
+
+const revealMessage = () => {
+    message.classList.remove('hide')
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, 1000);
 }
